@@ -21,6 +21,7 @@ namespace SGHR.Data.Models
         Disponible,
         Ocupada,
         EnMantenimiento,
-        Limpieza
+        Limpieza,
+        Reservada
     }
 }
