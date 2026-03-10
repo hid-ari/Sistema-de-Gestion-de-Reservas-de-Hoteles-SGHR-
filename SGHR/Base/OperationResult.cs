@@ -8,6 +8,8 @@ namespace SGHR.Data.Base
 {
     public class OperationResult
     {
+
+        public OperationResult() { }
         public OperationResult(bool isSuccces, string message, dynamic? data) 
         {
             IsSuccess = isSuccces;
