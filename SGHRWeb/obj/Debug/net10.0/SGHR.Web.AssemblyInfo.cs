@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SGHR.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfcdf75067caba44ec4fce516925dfac7ce46f0e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+137af27b03471f75b8f4f1acc18884578591d432")]
 [assembly: System.Reflection.AssemblyProductAttribute("SGHR.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGHR.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -51,7 +51,7 @@ namespace SGHRWeb.Controllers
                 _context.Clientes.Add(cliente);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Registro exitoso. ¡Bienvenido!";
+                TempData["SuccessMessage"] = "Registrado exitosamente";
                 return RedirectToAction("Index", "Home");
             }
 

@@ -21,16 +21,25 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Asegurar que la base de datos esté creada
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<SGHRDbContext>();
+    context.Database.EnsureCreated(); // Para desarrollo
+    // O context.Database.Migrate(); // Para producción con migraciones
+}
 
 app.Run();
+
+# En la terminal/consola de paquetes
+dotnet ef migrations add InitialCreate --project SGHR.Data --startup-project SGHRWeb
+dotnet ef database update --project SGHR.Data --startup-project SGHRWeb
