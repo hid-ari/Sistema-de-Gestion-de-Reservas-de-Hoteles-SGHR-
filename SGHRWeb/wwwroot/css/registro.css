@@ -1,0 +1,45 @@
+/* Estilos de validación personalizados */
+
+/* Bordes rojos para campos con errores */
+.input-validation-error {
+    border-color: #dc3545 !important;
+    border-width: 2px !important;
+}
+
+/* Estilo para mensajes de error */
+.field-validation-error {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+}
+
+/* Asteriscos obligatorios */
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Resaltar campos válidos */
+.input-validation-valid:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Estilo para el formulario de registro */
+#registroForm .form-control {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Hover en campos de formulario */
+#registroForm .form-control:hover:not(:focus) {
+    border-color: #86b7fe;
+}
+
+/* Estilo del card de registro */
+.card {
+    border-radius: 10px;
+}
+
+.card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

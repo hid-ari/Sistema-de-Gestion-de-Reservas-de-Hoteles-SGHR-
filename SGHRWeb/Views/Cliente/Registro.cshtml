@@ -1,0 +1,92 @@
+@model SGHRWeb.Models.RegistroClienteViewModel
+@{
+    ViewData["Title"] = "Registro de Cliente";
+}
+
+<link rel="stylesheet" href="~/css/registro.css" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form asp-action="Registro" method="post" id="registroForm">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label">
+                                @Html.DisplayNameFor(m => m.Nombre) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ingrese su nombre" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Apellido" class="form-label">
+                                @Html.DisplayNameFor(m => m.Apellido) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Apellido" class="form-control" placeholder="Ingrese su apellido" />
+                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">
+                                @Html.DisplayNameFor(m => m.Email) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Email" class="form-control" placeholder="usuario@dominio.com" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Telefono" class="form-label">
+                                @Html.DisplayNameFor(m => m.Telefono) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Telefono" class="form-control" placeholder="+1 234 567 8900" />
+                            <span asp-validation-for="Telefono" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contrasena" class="form-label">
+                                @Html.DisplayNameFor(m => m.Contrasena) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Contrasena" class="form-control" placeholder="Ingrese su contraseña" />
+                            <span asp-validation-for="Contrasena" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ConfirmarContrasena" class="form-label">
+                                @Html.DisplayNameFor(m => m.ConfirmarContrasena) <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="ConfirmarContrasena" class="form-control" placeholder="Confirme su contraseña" />
+                            <span asp-validation-for="ConfirmarContrasena" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>¿Ya tienes una cuenta? <a asp-controller="Home" asp-action="Index">Iniciar sesión</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/registro.js" asp-append-version="true"></script>
+}

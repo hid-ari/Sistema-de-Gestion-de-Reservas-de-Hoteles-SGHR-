@@ -1,0 +1,15 @@
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\bin\Debug\net10.0\SGHR.Data.deps.json
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\bin\Debug\net10.0\SGHR.Data.runtimeconfig.json
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\bin\Debug\net10.0\SGHR.Data.dll
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\bin\Debug\net10.0\SGHR.Data.pdb
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.csproj.AssemblyReference.cache
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.AssemblyInfoInputs.cache
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.AssemblyInfo.cs
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.csproj.CoreCompileInputs.cache
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.sourcelink.json
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.dll
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\refint\SGHR.Data.dll
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.pdb
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\SGHR.Data.genruntimeconfig.cache
+C:\Users\hidek\source\repos\hid-ari\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR-\SGHR\obj\Debug\net10.0\ref\SGHR.Data.dll
