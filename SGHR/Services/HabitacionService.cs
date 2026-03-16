@@ -15,15 +15,30 @@ namespace SGHR.Data.Services
         }
         public async Task<OperationResult> CreateHabitacionAsync(Habitacion habitacion)
         {
-            if (habitacion == null)
+            try
             {
-                return new OperationResult { IsSuccess = false, Message = "La habitación no puede ser nula." };
-            }
+                if (habitacion == null)
+                    return new OperationResult { IsSuccess = false, Message = "La habitación no puede ser nula." };
 
-            habitacion.Id = Guid.NewGuid();
-            await _context.Habitaciones.AddAsync(habitacion);
-            await _context.SaveChangesAsync();
-            return new OperationResult { Data = habitacion, IsSuccess = true, Message = "Habitación creada exitosamente." };
+                habitacion.Id = Guid.NewGuid();
+                await _context.Habitaciones.AddAsync(habitacion);
+                await _context.SaveChangesAsync();
+
+                return new OperationResult
+                {
+                    IsSuccess = true,
+                    Message = "Habitación creada exitosamente.",
+                    Data = habitacion
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult
+                {
+                    IsSuccess = false,
+                    Message = $"Ocurrió un error inesperado al crear la habitación: {ex.Message}"
+                };
+            }
 
         }
 
