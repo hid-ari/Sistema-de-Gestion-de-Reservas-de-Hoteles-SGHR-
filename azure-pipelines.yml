@@ -20,7 +20,7 @@ steps:
   displayName: 'Instalar .NET SDK'
   inputs:
     packageType: 'sdk'
-    version: '7.x'
+    version: '9.x'
 
 - script: dotnet restore
   displayName: 'Restaurar dependencias'
