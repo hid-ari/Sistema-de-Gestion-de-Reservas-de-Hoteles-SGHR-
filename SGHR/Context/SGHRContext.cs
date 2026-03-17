@@ -14,5 +14,6 @@ namespace SGHR.Data.Context
         {
         }
         public DbSet<Habitacion> Habitaciones { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
