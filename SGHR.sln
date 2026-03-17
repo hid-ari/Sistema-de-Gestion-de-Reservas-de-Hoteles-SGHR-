@@ -1,7 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+<<<<<<< HEAD
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8 d17.14
+=======
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
+>>>>>>> origin/Dev
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGHR.Data", "SGHR\SGHR.Data.csproj", "{50A166B8-C799-429B-9173-C4D20D34DBEF}"
 EndProject
