@@ -15,109 +15,93 @@ namespace SGHR.Data.Services
         }
         public async Task<OperationResult> CreateHabitacionAsync(Habitacion habitacion)
         {
-            OperationResult result = new OperationResult();
-            if (habitacion == null)
+            try
             {
-                result.IsSuccess = false;
-                result.Message = "La habitación no puede ser nula.";
-                return result;
-            }
+                if (habitacion == null)
+                    return new OperationResult { IsSuccess = false, Message = "La habitación no puede ser nula." };
 
-            habitacion.Id = Guid.NewGuid();
-            await _context.Habitaciones.AddAsync(habitacion);
-            await _context.SaveChangesAsync();
-            result.IsSuccess = true;
-            result.Message = "Habitación creada exitosamente.";
-            result.Data = habitacion;
-            return result;
+                habitacion.Id = Guid.NewGuid();
+                await _context.Habitaciones.AddAsync(habitacion);
+                await _context.SaveChangesAsync();
+
+                return new OperationResult
+                {
+                    IsSuccess = true,
+                    Message = "Habitación creada exitosamente.",
+                    Data = habitacion
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult
+                {
+                    IsSuccess = false,
+                    Message = $"Ocurrió un error inesperado al crear la habitación: {ex.Message}"
+                };
+            }
 
         }
 
         public async Task<OperationResult> DeleteHabitacionAsync(Guid id)
         {
-            OperationResult result = new OperationResult();
             if (id == Guid.Empty)
             {
-                result.IsSuccess = false;
-                result.Message = "El ID no puede ser vacío.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "El ID no puede ser vacío." };
             }
             Habitacion? habitacion = await _context.Habitaciones.FindAsync(id);
             if (habitacion == null)
             {
-                result.IsSuccess = false;
-                result.Message = "Habitación no encontrada.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "Habitación no encontrada." };
             }
             
             if (habitacion.Estado == EstadoHabitacion.Reservada)
             {
-                result.IsSuccess = false;
-                result.Message = "No se puede eliminar una habitación reservada.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "No se puede eliminar una habitación reservada." };
             }
-
-            result.IsSuccess = true;
-            result.Message = "Habitación eliminada exitosamente.";
-            return result;
-
+            _context.Habitaciones.Remove(habitacion);
+            await _context.SaveChangesAsync();
+            return new OperationResult { IsSuccess = true, Message = "Habitación eliminada exitosamente." };
         }
 
         public async Task<OperationResult> GetAllHabitacionesAsync()
         {
-            OperationResult result = new OperationResult();
-            result.Data = await _context.Habitaciones.ToListAsync();
-            return result;
+            var habitaciones = await _context.Habitaciones.AsNoTracking().ToListAsync();
+            return new OperationResult { IsSuccess = true, Data = habitaciones};
         }
 
         public async Task<OperationResult> GetHabitacionByIdAsync(Guid id)
         {
-            OperationResult result = new OperationResult();
             if (id == Guid.Empty)
             {
-                result.IsSuccess = false;
-                result.Message = "El ID no puede ser vacío.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "El ID no puede ser vacío." };
             }
             
             Habitacion? habitacion = await _context.Habitaciones.FindAsync(id);
 
             if (habitacion == null)
             {
-                result.IsSuccess = false;
-                result.Message = "Habitación no encontrada.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "Habitación no encontrada." };
             }
 
-            result.IsSuccess = true;
-            result.Data = habitacion;
-            return result;
-
+            return new OperationResult { IsSuccess = true, Data = habitacion };
         }
 
         public async Task<OperationResult> UpdateHabitacionAsync(Guid id, Habitacion habitacion)
         {
-            OperationResult result = new OperationResult();
             if (id == Guid.Empty)
             {
-                result.IsSuccess = false;
-                result.Message = "El ID no puede ser vacío.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "El ID no puede ser vacío." };
             }
 
             if (habitacion == null)
             {
-                result.IsSuccess = false;
-                result.Message = "La habitación no puede ser nula.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "La habitación no puede ser nula." };
             }
 
             Habitacion? existingHabitacion = await _context.Habitaciones.FindAsync(id);
             if (existingHabitacion == null)
             {
-                result.IsSuccess = false;
-                result.Message = "Habitación no encontrada.";
-                return result;
+                return new OperationResult { IsSuccess = false, Message = "Habitación no encontrada." };
             }
 
             existingHabitacion.Numero = habitacion.Numero;
@@ -130,11 +114,7 @@ namespace SGHR.Data.Services
             
             await _context.SaveChangesAsync();
             
-            result.IsSuccess = true;
-            result.Message = "Habitación actualizada exitosamente.";
-            result.Data = habitacion;
-            return result;
-
+            return new OperationResult { IsSuccess = true, Message = "Habitación actualizada exitosamente.", Data = habitacion };
         }
     }
 }
