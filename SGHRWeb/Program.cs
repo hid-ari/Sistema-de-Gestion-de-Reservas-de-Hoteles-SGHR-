@@ -23,7 +23,9 @@ app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
 
+    .WithStaticAssets();
+builder.Services.Configure<HotelSettings>(
+    builder.Configuration.GetSection("HotelSettings"));
 
 app.Run();

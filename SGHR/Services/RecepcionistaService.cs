@@ -5,16 +5,19 @@ using SGHR.Data.Helpers;
 using SGHR.Data.Models;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace SGHR.Data.Services
 {
     public class RecepcionistaService
     {
         private readonly SGHRContext _context;
+        private readonly HotelSettings _settings;
 
-        public RecepcionistaService(SGHRContext context)
+        public RecepcionistaService(SGHRContext context, IOptions<HotelSettings> settings)
         {
             _context = context;
+            _settings = settings.Value;
         }
 
         public async Task<OperationResult> CrearRecepcionistaAsync(
@@ -30,7 +33,8 @@ namespace SGHR.Data.Services
             if (!PasswordValidator.EsPasswordFuerte(password))
                 return OperationResult.Failure("La contraseña debe tener mínimo 8 caracteres, mayúsculas, números y símbolos.");
 
-            if (!emailCorporativo.EndsWith("@hotel.com"))
+            // 🔥 CAMBIO AQUÍ (ANTES @hotel.com HARDCODEADO)
+            if (!emailCorporativo.EndsWith(_settings.EmailDomain))
                 return OperationResult.Failure("El email debe pertenecer al dominio del hotel.");
 
             if (rolSolicitado == "Administrador")
@@ -83,4 +87,5 @@ namespace SGHR.Data.Services
             return Convert.ToBase64String(hash);
         }
     }
+}
 }
