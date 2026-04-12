@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +15,7 @@ namespace SGHR.Data.Context
         }
         public DbSet<Habitacion> Habitaciones { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<CategoriaHabitacion> CategoriasHabitacion { get; set; }
     }
 }
