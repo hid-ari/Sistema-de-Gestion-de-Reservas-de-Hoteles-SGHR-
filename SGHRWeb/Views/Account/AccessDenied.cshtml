@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Acceso Denegado";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso Denegado – SGHR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background:#0f1117;color:#e8eaf6;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+        .card{background:#1a1d2e;border:1px solid rgba(248,113,113,.2);border-radius:20px;padding:3rem 2.5rem;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.5);}
+        .icon-circle{width:80px;height:80px;background:rgba(248,113,113,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:#f87171;}
+        h1{font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
+        p{color:#8b8fa8;font-size:.9rem;line-height:1.6;margin-bottom:1.8rem;}
+        .btn{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,#6c63ff,#5a52d5);color:#fff;text-decoration:none;padding:.65rem 1.4rem;border-radius:10px;font-weight:600;font-size:.9rem;transition:opacity .2s;}
+        .btn:hover{opacity:.9;color:#fff;}
+        .btn-ghost{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e8eaf6;text-decoration:none;padding:.65rem 1.4rem;border-radius:10px;font-weight:500;font-size:.9rem;transition:background .2s;margin-left:.5rem;}
+        .btn-ghost:hover{background:rgba(255,255,255,.12);color:#e8eaf6;}
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="icon-circle"><i class="bi bi-shield-lock-fill"></i></div>
+    <h1>Acceso Denegado</h1>
+    <p>No tienes permisos para acceder a esta página. Por favor inicia sesión con una cuenta con los privilegios necesarios.</p>
+    <a asp-controller="Account" asp-action="Login" class="btn">
+        <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+    </a>
+    <a asp-controller="Home" asp-action="Index" class="btn-ghost">
+        <i class="bi bi-house-door"></i> Inicio
+    </a>
+</div>
+</body>
+</html>

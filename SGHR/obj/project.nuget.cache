@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YB7ofWz3TAA=",
+  "dgSpecHash": "vdPNBOEDNXE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hidek\\Desktop\\BACKUP\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--00071888768162f2ab28e32372f04db494713b91\\SGHR\\SGHR.Data.csproj",
+  "projectFilePath": "D:\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\SGHR\\SGHR.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hidek\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.13\\microsoft.entityframeworkcore.9.0.13.nupkg.sha512",
     "C:\\Users\\hidek\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.13\\microsoft.entityframeworkcore.abstractions.9.0.13.nupkg.sha512",

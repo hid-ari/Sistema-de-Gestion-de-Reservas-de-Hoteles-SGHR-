@@ -1,8 +1,84 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div style="background:linear-gradient(135deg,#1a1d2e 0%,rgba(108,99,255,.1) 100%);border-radius:20px;padding:2.5rem;margin-bottom:2rem;border:1px solid rgba(108,99,255,.2);">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <div style="font-size:3rem;">🏨</div>
+        <div>
+            <h1 style="font-size:1.8rem;font-weight:700;margin:0;">Sistema de Gestión de Reservas</h1>
+            <p style="color:var(--text-muted);margin:0;">Panel de administración del hotel · SGHR v1.0</p>
+        </div>
+    </div>
+    <div class="row g-3 mt-1">
+        <div class="col-6 col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">
+                    <i class="bi bi-tags" style="font-size:1.5rem;"></i>
+                </div>
+                <div style="color:var(--text-muted);font-size:.85rem;margin-top:.3rem;">Categorías</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">
+                    <i class="bi bi-calendar-check" style="font-size:1.5rem;"></i>
+                </div>
+                <div style="color:var(--text-muted);font-size:.85rem;margin-top:.3rem;">Reservas</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">
+                    <i class="bi bi-people" style="font-size:1.5rem;"></i>
+                </div>
+                <div style="color:var(--text-muted);font-size:.85rem;margin-top:.3rem;">Clientes</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">
+                    <i class="bi bi-door-open" style="font-size:1.5rem;"></i>
+                </div>
+                <div style="color:var(--text-muted);font-size:.85rem;margin-top:.3rem;">Habitaciones</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="sghr-card h-100">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <div style="width:40px;height:40px;background:rgba(108,99,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-tags" style="color:var(--primary);"></i>
+                </div>
+                <div>
+                    <div style="font-weight:600;">Gestión de Categorías</div>
+                    <div style="color:var(--text-muted);font-size:.8rem;">SRS §3.3</div>
+                </div>
+            </div>
+            <p style="color:var(--text-muted);font-size:.875rem;">Administra las categorías de habitaciones: nombre, tarifa por noche, características y disponibilidad.</p>
+            <a asp-controller="Categorias" asp-action="Index" class="btn-primary-sghr">
+                <i class="bi bi-arrow-right-circle"></i> Ir a Categorías
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="sghr-card h-100">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <div style="width:40px;height:40px;background:rgba(247,201,72,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-calendar-check" style="color:var(--accent);"></i>
+                </div>
+                <div>
+                    <div style="font-weight:600;">Gestión de Reservas</div>
+                    <div style="color:var(--text-muted);font-size:.8rem;">SRS §3.1</div>
+                </div>
+            </div>
+            <p style="color:var(--text-muted);font-size:.875rem;">Crea, modifica y cancela reservas. Validación de disponibilidad en tiempo real y registro de auditoría.</p>
+            <a asp-controller="Reservas" asp-action="Index" class="btn-primary-sghr">
+                <i class="bi bi-arrow-right-circle"></i> Ir a Reservas
+            </a>
+        </div>
+    </div>
 </div>

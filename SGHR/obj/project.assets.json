@@ -577,11 +577,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hidek\\Desktop\\BACKUP\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--00071888768162f2ab28e32372f04db494713b91\\SGHR\\SGHR.Data.csproj",
+      "projectUniqueName": "D:\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\SGHR\\SGHR.Data.csproj",
       "projectName": "SGHR.Data",
-      "projectPath": "C:\\Users\\hidek\\Desktop\\BACKUP\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--00071888768162f2ab28e32372f04db494713b91\\SGHR\\SGHR.Data.csproj",
+      "projectPath": "D:\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\SGHR\\SGHR.Data.csproj",
       "packagesPath": "C:\\Users\\hidek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hidek\\Desktop\\BACKUP\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--00071888768162f2ab28e32372f04db494713b91\\SGHR\\obj\\",
+      "outputPath": "D:\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\SGHR\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

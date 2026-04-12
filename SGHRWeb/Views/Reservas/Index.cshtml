@@ -1,0 +1,93 @@
+@model List<SGHR.Data.Models.Reserva>
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="page-title mb-0"><i class="bi bi-calendar-check me-2" style="color:var(--accent);"></i>Reservas</h1>
+        <p style="color:var(--text-muted);font-size:.875rem;margin-top:.25rem;">SRS §3.1 – Gestión de Reservas</p>
+    </div>
+    <a asp-action="Create" class="btn-primary-sghr"><i class="bi bi-plus-lg"></i> Nueva Reserva</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="sghr-card text-center py-5">
+        <div style="font-size:3rem;opacity:.4;">📅</div>
+        <p style="color:var(--text-muted);margin-top:1rem;">No hay reservas registradas. Crea la primera.</p>
+    </div>
+}
+else
+{
+    <div class="sghr-card p-0" style="overflow:hidden;">
+        <table class="sghr-table">
+            <thead>
+                <tr>
+                    <th>N° Reserva</th>
+                    <th>Cliente ID</th>
+                    <th>Categoría ID</th>
+                    <th>Entrada</th>
+                    <th>Salida</th>
+                    <th>Huéspedes</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td style="font-family:monospace;font-size:.75rem;color:var(--text-muted);">@r.NumeroReserva.ToString("N").Substring(0,8)…</td>
+                        <td>#@r.ClienteId</td>
+                        <td>#@r.CategoriaHabitacionId</td>
+                        <td style="font-weight:500;">@r.FechaEntrada.ToString("dd/MM/yyyy")</td>
+                        <td style="font-weight:500;">@r.FechaSalida.ToString("dd/MM/yyyy")</td>
+                        <td style="text-align:center;">@r.NumeroHuespedes</td>
+                        <td>
+                            @switch (r.Estado)
+                            {
+                                case SGHR.Data.Models.EstadoReserva.Confirmada:
+                                    <span class="badge-confirmada">Confirmada</span>
+                                    break;
+                                case SGHR.Data.Models.EstadoReserva.Cancelada:
+                                    <span class="badge-cancelada">Cancelada</span>
+                                    break;
+                                case SGHR.Data.Models.EstadoReserva.EnEspera:
+                                    <span class="badge-espera">En Espera</span>
+                                    break;
+                                case SGHR.Data.Models.EstadoReserva.CheckIn:
+                                    <span class="badge-checkin">Check-In</span>
+                                    break;
+                                default:
+                                    <span style="color:var(--text-muted);">@r.Estado</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex gap-1 flex-wrap">
+                                <a asp-action="Details" asp-route-id="@r.Id" class="btn-ghost" style="font-size:.8rem;padding:.3rem .65rem;">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                @if (r.Estado != SGHR.Data.Models.EstadoReserva.Cancelada)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@r.Id" class="btn-ghost" style="font-size:.8rem;padding:.3rem .65rem;">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="Cancelar" asp-route-id="@r.Id" method="post"
+                                          onsubmit="return confirm('¿Cancelar esta reserva?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="observacion" value="Cancelada desde el panel de administración." />
+                                        <button type="submit" class="btn-danger-sghr" style="font-size:.8rem;">
+                                            <i class="bi bi-x-circle"></i>
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

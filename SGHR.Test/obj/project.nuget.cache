@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "btWZ/MHxHCc=",
+  "dgSpecHash": "+RhOqhjqN0I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hidek\\Desktop\\BACKUP\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--00071888768162f2ab28e32372f04db494713b91\\SGHR.Test\\SGHR.Test.csproj",
+  "projectFilePath": "D:\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\Sistema-de-Gestion-de-Reservas-de-Hoteles-SGHR--main\\SGHR.Test\\SGHR.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hidek\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
     "C:\\Users\\hidek\\.nuget\\packages\\microsoft.codecoverage\\17.12.0\\microsoft.codecoverage.17.12.0.nupkg.sha512",
