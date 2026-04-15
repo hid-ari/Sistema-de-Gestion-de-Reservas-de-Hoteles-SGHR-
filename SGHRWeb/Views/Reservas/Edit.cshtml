@@ -1,0 +1,57 @@
+@model SGHR.Data.Models.Reserva
+@{
+    ViewData["Title"] = "Editar Reserva";
+    var categorias = ViewBag.Categorias as List<SGHR.Data.Models.CategoriaHabitacion> ?? new();
+}
+
+<div class="mb-4">
+    <a asp-action="Index" class="btn-ghost"><i class="bi bi-arrow-left"></i> Volver</a>
+</div>
+
+<div class="sghr-card" style="max-width:640px;">
+    <h1 class="page-title"><i class="bi bi-pencil me-2" style="color:var(--primary);"></i>Editar Reserva</h1>
+    <p style="color:var(--text-muted);font-size:.8rem;margin-top:-.8rem;margin-bottom:1.5rem;">
+        N° @Model.NumeroReserva.ToString("N").Substring(0,8)…
+    </p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert-sghr-danger mb-3">
+            <div asp-validation-summary="All" class="validation-summary-errors"></div>
+        </div>
+    }
+
+    <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="CategoriaHabitacionId">Categoría de Habitación *</label>
+                <select asp-for="CategoriaHabitacionId" class="form-select-sghr">
+                    @foreach (var cat in categorias)
+                    {
+                        <option value="@cat.Id">@cat.Nombre – $@cat.TarifaPorNoche.ToString("N2")/noche</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="NumeroHuespedes">Número de Huéspedes *</label>
+                <input asp-for="NumeroHuespedes" type="number" min="1" class="form-control-sghr" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="FechaEntrada">Fecha de Entrada *</label>
+                <input asp-for="FechaEntrada" type="date" class="form-control-sghr" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="FechaSalida">Fecha de Salida *</label>
+                <input asp-for="FechaSalida" type="date" class="form-control-sghr" />
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn-primary-sghr"><i class="bi bi-check-lg"></i> Guardar Cambios</button>
+            <a asp-action="Index" class="btn-ghost">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

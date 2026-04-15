@@ -1,0 +1,75 @@
+@model SGHR.Data.Models.Reserva
+@{
+    ViewData["Title"] = "Nueva Reserva";
+    var categorias = ViewBag.Categorias as List<SGHR.Data.Models.CategoriaHabitacion> ?? new();
+}
+
+<div class="mb-4">
+    <a asp-action="Index" class="btn-ghost"><i class="bi bi-arrow-left"></i> Volver</a>
+</div>
+
+<div class="sghr-card" style="max-width:640px;">
+    <h1 class="page-title"><i class="bi bi-calendar-plus me-2" style="color:var(--accent);"></i>Nueva Reserva</h1>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert-sghr-danger mb-3">
+            <div asp-validation-summary="All" class="validation-summary-errors"></div>
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="ClienteId">ID del Cliente *</label>
+                <input asp-for="ClienteId" type="number" min="1" class="form-control-sghr" placeholder="ej. 1" />
+                <span asp-validation-for="ClienteId" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="CategoriaHabitacionId">Categoría de Habitación *</label>
+                @if (categorias.Any())
+                {
+                    <select asp-for="CategoriaHabitacionId" class="form-select-sghr">
+                        <option value="">-- Selecciona una categoría --</option>
+                        @foreach (var cat in categorias)
+                        {
+                            <option value="@cat.Id">@cat.Nombre – $@cat.TarifaPorNoche.ToString("N2")/noche</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <div style="color:var(--danger);font-size:.85rem;padding:.6rem .9rem;background:rgba(248,113,113,.1);border-radius:8px;">
+                        ⚠️ No hay categorías disponibles. <a asp-controller="Categorias" asp-action="Create" style="color:var(--primary);">Crear una</a>
+                    </div>
+                    <input type="hidden" asp-for="CategoriaHabitacionId" value="0" />
+                }
+                <span asp-validation-for="CategoriaHabitacionId" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="FechaEntrada">Fecha de Entrada *</label>
+                <input asp-for="FechaEntrada" type="date" class="form-control-sghr"
+                       min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="FechaEntrada" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="FechaSalida">Fecha de Salida *</label>
+                <input asp-for="FechaSalida" type="date" class="form-control-sghr"
+                       min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="FechaSalida" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-sghr" asp-for="NumeroHuespedes">Número de Huéspedes *</label>
+                <input asp-for="NumeroHuespedes" type="number" min="1" class="form-control-sghr" placeholder="1" />
+                <span asp-validation-for="NumeroHuespedes" class="field-validation-error"></span>
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn-primary-sghr"><i class="bi bi-check-lg"></i> Confirmar Reserva</button>
+            <a asp-action="Index" class="btn-ghost">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

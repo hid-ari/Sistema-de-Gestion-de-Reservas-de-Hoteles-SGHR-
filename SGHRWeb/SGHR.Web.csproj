@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Perfil\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SGHR\SGHR.Data.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,50 +1,136 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SGHRWeb</title>
-    <script type="importmap"></script>
+    <meta name="description" content="Sistema de Gestión de Reservas de Hoteles – SGHR" />
+    <title>@ViewData["Title"] – SGHR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SGHRWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --primary-dark: #5a52d5;
+            --accent: #f7c948;
+            --bg: #0f1117;
+            --surface: #1a1d2e;
+            --surface2: #232640;
+            --text: #e8eaf6;
+            --text-muted: #8b8fa8;
+            --success: #4ade80;
+            --danger: #f87171;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+        .main-nav {
+            background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+            border-bottom: 1px solid rgba(108,99,255,.25);
+            padding: .75rem 1.5rem; position: sticky; top: 0; z-index: 1000;
+        }
+        .brand { display:flex; align-items:center; gap:.6rem; font-weight:700; font-size:1.2rem; color:var(--primary)!important; text-decoration:none; }
+        .brand-icon { width:36px; height:36px; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1rem; }
+        .nav-link-custom { color:var(--text-muted)!important; font-weight:500; font-size:.9rem; padding:.45rem .85rem!important; border-radius:8px; transition:all .2s; display:flex; align-items:center; gap:.4rem; text-decoration:none; }
+        .nav-link-custom:hover { color:var(--text)!important; background:rgba(108,99,255,.18); }
+        .sghr-card { background:var(--surface); border:1px solid rgba(255,255,255,.07); border-radius:var(--radius); padding:1.5rem; transition:transform .2s,box-shadow .2s; }
+        .sghr-card:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(108,99,255,.15); }
+        .btn-primary-sghr { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); border:none; color:#fff; font-weight:600; padding:.5rem 1.2rem; border-radius:8px; transition:opacity .2s,transform .15s; text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; }
+        .btn-primary-sghr:hover { opacity:.9; transform:translateY(-1px); color:#fff; }
+        .btn-danger-sghr { background:rgba(248,113,113,.15); border:1px solid var(--danger); color:var(--danger); font-weight:600; padding:.35rem .9rem; border-radius:8px; transition:background .2s; }
+        .btn-danger-sghr:hover { background:rgba(248,113,113,.3); color:var(--danger); }
+        .btn-ghost { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--text); border-radius:8px; padding:.35rem .9rem; font-weight:500; transition:background .2s; text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; }
+        .btn-ghost:hover { background:rgba(255,255,255,.12); color:var(--text); }
+        .sghr-table { width:100%; border-collapse:separate; border-spacing:0 .4rem; }
+        .sghr-table thead th { color:var(--text-muted); font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; padding:.5rem 1rem; border:none; }
+        .sghr-table tbody tr td { background:var(--surface); padding:.85rem 1rem; font-size:.875rem; border:none; }
+        .sghr-table tbody tr td:first-child { border-radius:var(--radius) 0 0 var(--radius); }
+        .sghr-table tbody tr td:last-child { border-radius:0 var(--radius) var(--radius) 0; }
+        .sghr-table tbody tr:hover td { background:var(--surface2); }
+        .badge-confirmada { background:rgba(74,222,128,.15); color:var(--success); border-radius:6px; padding:.2rem .6rem; font-size:.75rem; font-weight:600; }
+        .badge-cancelada { background:rgba(248,113,113,.15); color:var(--danger); border-radius:6px; padding:.2rem .6rem; font-size:.75rem; font-weight:600; }
+        .badge-espera { background:rgba(247,201,72,.15); color:var(--accent); border-radius:6px; padding:.2rem .6rem; font-size:.75rem; font-weight:600; }
+        .badge-checkin { background:rgba(96,165,250,.15); color:#60a5fa; border-radius:6px; padding:.2rem .6rem; font-size:.75rem; font-weight:600; }
+        .form-control-sghr, .form-select-sghr { background:var(--surface2); border:1px solid rgba(255,255,255,.1); color:var(--text); border-radius:8px; padding:.6rem .9rem; width:100%; transition:border-color .2s; }
+        .form-control-sghr:focus, .form-select-sghr:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(108,99,255,.2); background:var(--surface2); color:var(--text); }
+        .form-control-sghr::placeholder { color:var(--text-muted); }
+        .form-label-sghr { font-weight:500; font-size:.875rem; color:var(--text-muted); margin-bottom:.35rem; display:block; }
+        .alert-sghr-success { background:rgba(74,222,128,.1); border:1px solid rgba(74,222,128,.3); color:var(--success); border-radius:10px; padding:.8rem 1rem; }
+        .alert-sghr-danger { background:rgba(248,113,113,.1); border:1px solid rgba(248,113,113,.3); color:var(--danger); border-radius:10px; padding:.8rem 1rem; }
+        .stat-card { background:var(--surface2); border-radius:12px; padding:1.2rem 1.5rem; border:1px solid rgba(255,255,255,.06); }
+        .stat-number { font-size:2rem; font-weight:700; color:var(--primary); }
+        .page-title { font-size:1.5rem; font-weight:700; margin-bottom:1.5rem; }
+        footer { text-align:center; color:var(--text-muted); font-size:.8rem; padding:1.5rem; margin-top:3rem; border-top:1px solid rgba(255,255,255,.06); }
+        ::-webkit-scrollbar { width:6px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--surface2); border-radius:3px; }
+        .validation-summary-errors ul { margin:0; padding-left:1.2rem; }
+        .field-validation-error { color:var(--danger); font-size:.8rem; }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SGHRWeb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="main-nav">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <a class="brand" asp-controller="Home" asp-action="Index">
+                <div class="brand-icon">🏨</div> SGHR
+            </a>
+            <div class="d-flex align-items-center gap-1 flex-wrap">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a class="nav-link-custom" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> Inicio</a>
+                    <a class="nav-link-custom" asp-controller="Categorias" asp-action="Index"><i class="bi bi-tags"></i> Categorías</a>
+                    <a class="nav-link-custom" asp-controller="Reservas" asp-action="Index"><i class="bi bi-calendar-check"></i> Reservas</a>
+                    <!-- Usuario autenticado -->
+                    <div style="width:1px;height:20px;background:rgba(255,255,255,.12);margin:0 .25rem;"></div>
+                    <div class="d-flex align-items-center gap-2 ms-1">
+                        <div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">
+                            @User.Identity.Name?.Substring(0,1).ToUpper()
+                        </div>
+                        <div style="line-height:1.2;">
+                            <div style="font-size:.85rem;font-weight:600;color:var(--text);">@User.Identity.Name</div>
+                            <div style="font-size:.7rem;color:var(--text-muted);">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                        </div>
+                    </div>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="ms-1">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="nav-link-custom" style="border:none;background:rgba(248,113,113,.12);color:#f87171!important;cursor:pointer;">
+                            <i class="bi bi-box-arrow-right"></i> Salir
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a class="nav-link-custom" asp-controller="Account" asp-action="Login"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
+                    <a class="nav-link-custom" asp-controller="Account" asp-action="Register"
+                       style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff!important;padding:.4rem .9rem!important;border-radius:8px;">
+                        <i class="bi bi-person-plus"></i> Registrarse
+                    </a>
+                }
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-4 py-4" style="max-width:1200px;margin:0 auto;">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert-sghr-success mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill"></i> @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert-sghr-danger mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-triangle-fill"></i> @TempData["Error"]
+            </div>
+        }
+        <main>@RenderBody()</main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - SGHRWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <footer>&copy; 2026 · Sistema de Gestión de Reservas de Hoteles — SGHR</footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

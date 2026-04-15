@@ -1,0 +1,70 @@
+@model SGHR.Data.Models.Reserva
+@{
+    ViewData["Title"] = "Detalle de Reserva";
+}
+
+<div class="mb-4">
+    <a asp-action="Index" class="btn-ghost"><i class="bi bi-arrow-left"></i> Volver a Reservas</a>
+</div>
+
+<div class="sghr-card" style="max-width:620px;">
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div style="width:50px;height:50px;background:rgba(247,201,72,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">📋</div>
+        <div>
+            <h1 style="font-size:1.25rem;font-weight:700;margin:0;">Reserva #@Model.Id</h1>
+            <div style="color:var(--text-muted);font-size:.8rem;font-family:monospace;">@Model.NumeroReserva</div>
+        </div>
+        <div class="ms-auto">
+            @switch (Model.Estado)
+            {
+                case SGHR.Data.Models.EstadoReserva.Confirmada:
+                    <span class="badge-confirmada" style="font-size:.9rem;padding:.35rem .9rem;">✓ Confirmada</span>
+                    break;
+                case SGHR.Data.Models.EstadoReserva.Cancelada:
+                    <span class="badge-cancelada" style="font-size:.9rem;padding:.35rem .9rem;">✗ Cancelada</span>
+                    break;
+                default:
+                    <span class="badge-espera" style="font-size:.9rem;padding:.35rem .9rem;">@Model.Estado</span>
+                    break;
+            }
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Cliente ID</div>
+            <div style="font-weight:600;font-size:1rem;">#@Model.ClienteId</div>
+        </div>
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Categoría ID</div>
+            <div style="font-weight:600;font-size:1rem;">#@Model.CategoriaHabitacionId</div>
+        </div>
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Fecha Entrada</div>
+            <div style="font-weight:600;">@Model.FechaEntrada.ToString("dd MMM yyyy")</div>
+        </div>
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Fecha Salida</div>
+            <div style="font-weight:600;">@Model.FechaSalida.ToString("dd MMM yyyy")</div>
+        </div>
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Noches</div>
+            <div style="font-weight:600;color:var(--accent);">@((Model.FechaSalida - Model.FechaEntrada).Days)</div>
+        </div>
+        <div class="col-6">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Huéspedes</div>
+            <div style="font-weight:600;">@Model.NumeroHuespedes</div>
+        </div>
+        <div class="col-12">
+            <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Creada el</div>
+            <div style="font-weight:500;">@Model.FechaCreacion.ToString("dd/MM/yyyy HH:mm") UTC</div>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ObservacionCancelacion))
+        {
+            <div class="col-12">
+                <div style="color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Observación de cancelación</div>
+                <div class="alert-sghr-danger mt-1">@Model.ObservacionCancelacion</div>
+            </div>
+        }
+    </div>
+</div>
